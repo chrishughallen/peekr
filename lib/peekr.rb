@@ -1,9 +1,19 @@
-# frozen_string_literal: true
-
-require_relative "peekr/version"
-require_relative "peekr/peek"
-
+# lib/peekr/peekr.rb
 module Peekr
-  class Error < StandardError; end
-  # You could add more methods or classes here in the future if needed
+  def self.peek(model)
+    puts "Exploring: #{model.name}"
+
+    puts "\n Columns:"
+    puts model.columns.map { |col| "- #{col.name} (#{col.type})" }
+
+    puts "\nAssociations:"
+    puts model.reflect_on_all_associations.map { |assoc| "- #{assoc.macro} :#{assoc.name}" }
+
+    puts "\nInstance Methods (defined on model only):"
+    (model.instance_methods(false) - Object.instance_methods).each do |method|
+      puts "- #{method}"
+    end
+
+    nil
+  end
 end
