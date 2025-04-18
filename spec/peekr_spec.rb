@@ -5,7 +5,7 @@ RSpec.describe Peekr do
     expect(Peekr::VERSION).not_to be nil
   end
 
-  it "does something useful" do
-    expect(false).to eq(true)
+  it "responds to explore" do
+    expect(Peekr::Peek).to respond_to(:explore)
   end
 end
